@@ -94,3 +94,4 @@ What will be created:
 - Install cloud-aws plugin for elasticsearch
 - Set java heap size as half or ram for elasticsearch
 - Configure autodiscovery via ec2 tags for elasticsearch nodes
+- Configure SSL
