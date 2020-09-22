@@ -58,3 +58,15 @@
   command: /usr/share/elasticsearch/bin/plugin install cloud-aws
   when: plugin.stat.isdir is not defined
   notify: restart elasticsearch
+  
+- name: Copy over nginx defailt file 
+  copy: src=/usr/share/elasticsearch/efault dest=/etc/nginx/sites-available/default
+  notify: restart elasticsearch
+
+- name: Copy over chain file 
+  copy: src=/usr/share/elasticsearch/fullchain.pem dest=/etc/nginx/sites-available/fullchain.pem
+  notify: restart elasticsearch
+
+- name: Copy over pvt keypair 
+  copy: src=/usr/share/elasticsearch/privkey.pem dest=/etc/nginx/sites-available/privkey.pem
+  notify: restart elasticsearch
