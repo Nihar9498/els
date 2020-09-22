@@ -10,13 +10,17 @@
 
 Ansible uses python-boto library to call AWS API, and boto needs AWS credentials in order to perform all the functions. There are many ways to configure your AWS credentials. The easiest way is to crate a .boto file under your user home directory:
 ```shell
-vim ~/.boto
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/my_aws
+ansible-vault create group_vars/all/pass.yml
+New Vault password:
+Confirm New Vault password:
 ```
+
 Then add the following:
-```shell
-[Credentials]
-aws_access_key_id = <your_access_key_here>
-aws_secret_access_key = <your_secret_key_here>
+```ansible-vault edit group_vars/all/pass.yml 
+Vault password:
+ec2_access_key: AAAAAAAAAAAAAABBBBBBBBBBBB                                      
+ec2_secret_key: afjdfadgf$fgajk5ragesfjgjsfdbtirhf
 ```
 
 ### To use this Role:
@@ -31,7 +35,7 @@ tags:
   Name: "{{ cluster }}"
 
 # ec2_key
-key_name: "devops-key"
+key_name: "my_aws"
 ssh_key_location: ~/.ssh/id_rsa.pub 
 
 # VPC
@@ -71,7 +75,6 @@ ansible-playbook setup_aws.yml
 
 What will be created:
 - Ssh key pair
-- VPC with subnets in different regions
 - Network security group that allows any ssh traffic and internal vpc traffic
 - IAM role with policy that allows ec2 discovery
 - Ec2 instances in all vpc networks
