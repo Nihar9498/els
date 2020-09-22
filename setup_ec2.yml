@@ -8,7 +8,6 @@
     key_name: my_aws
     region: us-east-1
     image: ami-0dba2cb6798deb6d8
-    id: "web-app"
     sec_group: "{{ id }}-sec"
 
   tasks:
